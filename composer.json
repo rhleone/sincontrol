@@ -1,0 +1,33 @@
+{
+    "name": "oness/sincontrol",
+    "description": "Generador de Codigo de Control V7 impuestos nacionales de Bolivia",
+    "type": "project",
+    "license": "GPL-v3",
+    "authors": [
+        {
+            "name": "Roger Leon",
+            "email": "rhleone@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Oness\\Sincontrol\\": "src/",
+            "Oness\\Sincontrol\\tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Oness\\Sincontrol\\CodigoControlServiceProvider"
+            ],
+            "aliases": {
+                "CodigoControl": "Oness\\Sincontrol\\Facades\\GeneradorCodigoControl"
+            }
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.5"
+    }
+}
