@@ -31,6 +31,6 @@
         "phpunit/phpunit": "^9.5"
     },
     "require": {
-        "setasign/fpdf": "^1.8.3"
+        "setasign/fpdf": "^1.8"
     }
 }
