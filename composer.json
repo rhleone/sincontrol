@@ -29,5 +29,8 @@
     "require-dev": {
         "orchestra/testbench": "^6.0",
         "phpunit/phpunit": "^9.5"
+    },
+    "require": {
+        "setasign/fpdf": "^1.8.3"
     }
 }
