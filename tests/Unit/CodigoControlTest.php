@@ -1,6 +1,6 @@
 <?php
 
-use Oness\Sincontrol\Generador;
+use Oness\Sincontrol\Classes\Generador;
 use Oness\Sincontrol\tests\TestCase;
 
 class CodigoControlTest extends TestCase{

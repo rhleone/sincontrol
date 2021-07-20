@@ -2,6 +2,7 @@
 namespace Oness\Sincontrol;
 
 use Illuminate\Support\ServiceProvider;
+use Oness\Sincontrol\Classes\Generador;
 
 class CodigoControlServiceProvider extends ServiceProvider{
  

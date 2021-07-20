@@ -1,5 +1,5 @@
 <?php
-namespace Oness\Sincontrol;
+namespace Oness\Sincontrol\Classes;
 
 class AllegedRC4 {
 

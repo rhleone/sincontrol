@@ -1,6 +1,6 @@
 <?php 
 
-namespace Oness\Sincontrol;
+namespace Oness\Sincontrol\Classes;
 
 class Generador{
 
@@ -86,5 +86,3 @@ class Generador{
 
 
 }
-
-new Generador();
