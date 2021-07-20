@@ -1,7 +1,7 @@
 {
     "name": "oness/sincontrol",
     "description": "Generador de Codigo de Control V7 impuestos nacionales de Bolivia",
-    "type": "project",
+    "type": "library",
     "license": "LGPL-2.1",
     "authors": [
         {
