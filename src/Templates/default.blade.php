@@ -85,8 +85,8 @@
     <body>
         <header>
             <div style="position:absolute; left:0pt; width:250pt;">
-            <img class="img-rounded"  height="{{ $invoice->logo_height }}" src="{{ public_path($invoice->logo)}}" alt="Logo" >
-            {{public_path($invoice->logo)}}
+            <img class="img-rounded"  height="{{ $invoice->logo_height }}" src="data:image/png;base64,{{$invoice->logo}}" alt="Logo {{$invoice->logo}}"  >
+        
             <div style="position:absolute; top:40pt; left:0pt; width:250pt;">
                     <div class="panel panel-default">
                         <div class="panel-body text-center">
@@ -125,7 +125,7 @@
                             {!! $invoice->customer_details->count() == 0 ? '<i>No customer details</i><br />' : '' !!}
                             <b>Se&ntilde;or(es):</b>{{ $invoice->customer_details->get('name') }}<br />
                             <b>NIT/CI:</b> {{ $invoice->customer_details->get('id') }}<br />
-                            <b>Fecha Emisi&oacute;n: </b> {{ $invoice->business_details->get('city') }}, {{ $invoice->date->formatLocalized('%A %d %B  %Y') }}
+                            <b>Fecha Emisi&oacute;n: </b> {{ $invoice->business_details->get('city') }}, {{ $invoice->date->formatLocalized(' %d %B de %Y') }}
                         </div>
                     </div>
                 </div>
@@ -204,7 +204,6 @@
                 </div>
             @endif
         </main>
-
         <!-- Page count -->
         <script type="text/php">
             if (isset($pdf) && $GLOBALS['with_pagination'] && $PAGE_COUNT > 1) {
