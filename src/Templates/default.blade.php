@@ -125,7 +125,7 @@
                             {!! $invoice->customer_details->count() == 0 ? '<i>No customer details</i><br />' : '' !!}
                             <b>Se&ntilde;or(es):</b>{{ $invoice->customer_details->get('name') }}<br />
                             <b>NIT/CI:</b> {{ $invoice->customer_details->get('id') }}<br />
-                            <b>Fecha Emisi&oacute;n: </b> {{ $invoice->business_details->get('city') }}, {{ $invoice->date->formatLocalized(' %d %B de %Y') }}
+                            <b>Fecha Emisi&oacute;n: </b> {{ $invoice->business_details->get('city') }}, {{ $invoice->date->formatLocalized(' %d de %B de %Y') }}
                         </div>
                     </div>
                 </div>
