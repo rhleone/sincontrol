@@ -448,6 +448,22 @@ class Factura
         return $this->pdf->stream($name);
     }
 
+      /**
+     * Return output of the generated PDF.
+     *
+     * @method output
+     *
+     * @param string $name
+     *
+     * @return response
+     */
+    public function output($name = 'invoice')
+    {
+        $this->generate();
+
+        return $this->pdf->output();
+    }
+
     public function qr(){
         
         if ( count($this->qr_details) > 0){
