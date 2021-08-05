@@ -172,7 +172,7 @@
                     <div >
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body" >
-                               C&oacute;digo de Control media: {{ $invoice->code }}<br/>
+                               C&oacute;digo de Control: {{ $invoice->code }}<br/>
                                Fecha L&iacute;mite de Emisi&oacute;n: {{ $invoice->due_date->format('d/m/Y') }}<br/>
                                <div style="position:absolute; top:10px;left:600px">
                                <img src="data:image/png;base64, {!! base64_encode($invoice->qr())!!}" />

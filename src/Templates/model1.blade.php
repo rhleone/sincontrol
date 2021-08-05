@@ -180,7 +180,7 @@
                             <div class="panel-body" >
                                C&oacute;digo de Control: {{ $invoice->code }}<br/>
                                Fecha L&iacute;mite de Emisi&oacute;n: {{ $invoice->due_date->format('d/m/Y') }}<br/>
-                               MANTENGA SUS PAGOS  POR ADELANTADO EVITE MULTAS POR RECONEXION
+                               MANTENGA SUS PAGOS  POR ADELANTADO EVITE MULTAS POR RECONEXION 
                                <div style="position:absolute; top:10px;left:305pt">
                                <img src="data:image/png;base64, {!! base64_encode($invoice->qr())!!}" />
                                </div>

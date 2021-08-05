@@ -31,7 +31,7 @@ class PDF
         $options->setIsRemoteEnabled(true);
         $options->setIsPhpEnabled(true);
         
-        if ($Factura->template == "model1")
+        if ($Factura->template == "model1") 
           $options->setDefaultPaperSize('half-letter');
         
         $pdf = new Dompdf($options);
