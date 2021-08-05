@@ -129,4 +129,9 @@ return [
   */
   'duplicate_header' => false,
 
+  /*
+  | this value is the default invoice design in printing view
+  */
+  'invoice_design' => env('COMP_INVOICE_DESIGN','model1'),
+
 ];

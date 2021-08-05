@@ -211,7 +211,7 @@ class Factura
     public function __construct($name = 'Factura')
     {
         $this->name = $name;
-        $this->template = 'default';
+        $this->template = config('sincontrol.invoice_design');
         $this->items = Collection::make([]);
         $this->currency = config('sincontrol.currency');
         $this->decimals = config('sincontrol.decimals');

@@ -8,10 +8,11 @@
                 -webkit-box-sizing: border-box;
                 -moz-box-sizing: border-box;
                 box-sizing: border-box;
+                margin: 1px;
             }
             h1,h2,h3,h4,h5,h6,p,span,div { 
                 font-family: DejaVu Sans; 
-                font-size:10px;
+                font-size:9px;
                 font-weight: normal;
             }
             .title{
@@ -25,13 +26,13 @@
             }
             th,td { 
                 font-family: DejaVu Sans; 
-                font-size:10px;
+                font-size:9px;
             }
             .panel {
-                margin-bottom: 20px;
+                margin-bottom: 2px;
                 background-color: #fff;
-                border: 1px solid transparent;
-                border-radius: 4px;
+                border: 0px solid transparent;
+                border-radius: 0px;
                 -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
                 box-shadow: 0 1px 1px rgba(0,0,0,.05);
             }
@@ -39,7 +40,7 @@
                 border-color: #ddd;
             }
             .panel-body {
-                padding: 15px;
+                padding: 5px;
             }
             table {
                 width: 100%;
@@ -60,8 +61,8 @@
             }
             .well {
                 min-height: 20px;
-                padding: 19px;
-                margin-bottom: 20px;
+                padding: 15px;
+                margin-bottom: 16px;
                 background-color: #f5f5f5;
                 border: 1px solid #e3e3e3;
                 border-radius: 4px;
@@ -70,6 +71,12 @@
             }
             .text-center{
                 text-align: center;
+            }
+            footer {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 70pt;   
             }
         </style>
         @if($invoice->duplicate_header)
@@ -84,10 +91,12 @@
     </head>
     <body>
         <header>
-            <div style="position:absolute; left:0pt; width:250pt;">
-            <img class="img-rounded"  height="{{ $invoice->logo_height }}" src="data:image/png;base64,{{$invoice->logo}}" alt="Logo {{$invoice->logo}}"  >
-        
-            <div style="position:absolute; top:40pt; left:0pt; width:250pt;">
+        <div style="position:absolute; left:0pt; z-index: -1; width:100%;">
+            <div style="position:absolute; top:0pt; left:0pt;">
+               <img class="img-rounded"  height="{{ $invoice->logo_height }}" src="data:image/png;base64,{{$invoice->logo}}" alt="Logo"  >
+            </div>
+            <div style="position:absolute; top:0pt; left:0pt; width:176pt;margin-left: 105pt;">
+            
                     <div class="panel panel-default">
                         <div class="panel-body text-center">
                             {!! $invoice->business_details->count() == 0 ? '<i>No business details</i><br />' : '' !!}
@@ -98,35 +107,41 @@
                             CASA MATRIZ
                         </div>
                     </div>
+                   
                 </div>
+                
             </div>
-            <div style="margin-left:300pt;">
+            <div style="margin-left:280pt;">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             {!! $invoice->business_details->count() == 0 ? '<i>No business details</i><br />' : '' !!}
                             NIT: {{ $invoice->business_details->get('id') }}<br />
-                            N&uacute;mero Autorizaci&oacute;n:@if ($invoice->auth) {{ $invoice->auth }} @endif<br />
-                            N&uacute;mero {{ $invoice->title }}:@if ($invoice->number) {{ $invoice->number }} @endif<br />
+                            {{ $invoice->title }}<br />
+                            N&deg;:@if ($invoice->number) {{ $invoice->number }} @endif<br />
+                            N&deg; AUTORIZACI&Oacute;N:<br />
+                            @if ($invoice->auth) {{ $invoice->auth }} @endif<br />
+                            
                         </div>
-                    </div>
-                    <p class="text-center">
+                        <p class="text-center">
                          <b class="">ORIGINAL</b> <br />
-                         Actividad:{{ $invoice->activity }}
-                    </p>
+                         {{ $invoice->activity }}
+                        </p>
+                    </div>
+                    
             </div>
           
         </header>
         <main>
             <div style="clear:both; position:relative;">
                 <div >
-                    <h4 class="title">{{ $invoice->title }}</h4>
-                    <h3 class="subtitle">{{ $invoice->subtitle }}</h3>
+                <h4 class="title">{{ $invoice->title }}</h4>
+                <h3 class="subtitle">{{ $invoice->subtitle }}</h3>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             {!! $invoice->customer_details->count() == 0 ? '<i>No customer details</i><br />' : '' !!}
-                            <b>Se&ntilde;or(es):</b>{{ $invoice->customer_details->get('name') }}<br />
+                            <b>{{ $invoice->business_details->get('city') }}: </b>  {{ $invoice->date->formatLocalized(' %d de %B de %Y') }} 
                             <b>NIT/CI:</b> {{ $invoice->customer_details->get('id') }}<br />
-                            <b>Fecha Emisi&oacute;n: </b> {{ $invoice->business_details->get('city') }}, {{ $invoice->date->formatLocalized(' %d %B de %Y') }}
+                            <b>Se&ntilde;or(es):</b>{{ $invoice->customer_details->get('name') }}
                         </div>
                     </div>
                 </div>
@@ -134,36 +149,27 @@
             <table class="table table-bordered">
                 <thead>
                     <tr style="background-color: #7393B3;">
-                        <th style="width:5%">#</th>
-                        @if($invoice->shouldDisplayImageColumn())
-                            <th>Image</th>
-                        @endif
-                        <th style="width:55%">Descripci&oacute;n</th>
-                        <th style="width:10%">Cantidad</th>
-                        <th style="width:10%">Precio Unitario</th>
-                        <th style="width:20%">Subtotal</th>
+                        <th style="width:10%">ITEM</th>
+                        <th style="width:75%">CONCEPTO</th>
+                        <th style="width:20%">IMPORTE</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($invoice->items as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            @if($invoice->shouldDisplayImageColumn())
-                                <td>@if(!is_null($item->get('imageUrl'))) <img src="{{ url($item->get('imageUrl')) }}" />@endif</td>
-                            @endif
                             <td>{{ $item->get('name') }}</td>
-                            <td>{{ $item->get('ammount') }}</td>
-                            <td>{{ $item->get('price_formatted') }} </td>
                             <td>{{ $item->get('totalPrice') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
-                  <tr>
-                    <td>Son:</td>
-                    <td colspan="2">{{ $invoice->totalPriceLiteral() }} {{ $invoice->formatCurrency()->name_plural }}</td>
-                    <td><b>Total:</b></td>
+                 <tr>
+                    <td colspan="2" style="text-align: right;"><b>Total:</b></td>
                     <td>{{ $invoice->totalPriceFormatted() }}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Son: {{ $invoice->totalPriceLiteral() }} {{ $invoice->formatCurrency()->name_plural }}</td>
                   </tr>
                 </tfoot>
             </table>
@@ -172,9 +178,10 @@
                     <div >
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body" >
-                               C&oacute;digo de Control media: {{ $invoice->code }}<br/>
+                               C&oacute;digo de Control: {{ $invoice->code }}<br/>
                                Fecha L&iacute;mite de Emisi&oacute;n: {{ $invoice->due_date->format('d/m/Y') }}<br/>
-                               <div style="position:absolute; top:10px;left:600px">
+                               MANTENGA SUS PAGOS  POR ADELANTADO EVITE MULTAS POR RECONEXION
+                               <div style="position:absolute; top:10px;left:305pt">
                                <img src="data:image/png;base64, {!! base64_encode($invoice->qr())!!}" />
                                </div>
                                
@@ -187,7 +194,6 @@
             <div style="clear:both; position:relative;">
                 @if($invoice->notes)
                     <div style="position:absolute; left:0pt; width:250pt;">
-                        <h4>Notes:</h4>
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 {{ $invoice->notes }}
@@ -198,10 +204,10 @@
                
             </div>
             @if ($invoice->footnote)
-                <br /><br />
-                <div class="well text-center">
+                
+                <div class="well text-center" style="width: 280pt;">
                     {{ $invoice->footnote }}
-                    <p style="font-size:9px;"><i>{{ $invoice->legend }}</i></p>
+                    <p style="font-size:8px;"><i>{{ $invoice->legend }}</i></p>
                 </div>
             @endif
         </main>
@@ -212,5 +218,28 @@
                 $pdf->page_text(($pdf->get_width()/2) - (strlen($pageText) / 2), $pdf->get_height()-20, $pageText, $fontMetrics->get_font("DejaVu Sans, Arial, Helvetica, sans-serif", "normal"), 7, array(0,0,0));
             }
         </script>
+        <footer>
+            <div style="position:absolute; left:0pt; width:250pt;">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <b>RAZON SOCIAL:</b>{{ $invoice->customer_details->get('name') }}<br />
+                                <b>NIT/CI:</b>{{ $invoice->customer_details->get('id') }}<br />
+                                <b>CODIGO CLIENTE:</b> <br/>
+                                <b>TOTAL PAGADO:</b>{{ $invoice->totalPriceFormatted() }}<br />
+                                <b>FECHA PAGO:</b> {{ $invoice->date->format('d/m/Y')}}
+
+                            </div>
+                       </div>
+            </div>
+            <div style="position:absolute; left:0pt; width:250pt;margin-left: 200pt;">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <b>NIT:</b>{{ $invoice->business_details->get('id') }}<br />
+                                <b>NRO FACTURA:</b>{{ $invoice->number }}<br />
+                                <b>NRO AUTORIZACION:</b>{{ $invoice->auth }}<br />
+                            </div>
+                       </div>
+            </div>
+        </footer>
     </body>
 </html>
