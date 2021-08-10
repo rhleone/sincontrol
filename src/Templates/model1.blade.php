@@ -56,7 +56,7 @@
                 vertical-align: middle;
             }
             th, td  {
-                border: 1px solid #ddd;
+                border: 0px solid #ddd;
                 padding: 6px;
             }
             .well {
@@ -93,7 +93,7 @@
         <header>
         <div style="position:absolute; left:0pt; z-index: -1; width:100%;">
             <div style="position:absolute; top:0pt; left:0pt;">
-               <img class="img-rounded"  height="{{ $invoice->logo_height }}" src="data:image/png;base64,{{$invoice->logo}}" alt="Logo"  >
+               <!--<img class="img-rounded"  height="{{ $invoice->logo_height }}" src="data:image/png;base64,{{$invoice->logo}}" alt="Logo"  >-->
             </div>
             <div style="position:absolute; top:0pt; left:0pt; width:176pt;margin-left: 105pt;">
             
@@ -101,10 +101,12 @@
                         <div class="panel-body text-center">
                             {!! $invoice->business_details->count() == 0 ? '<i>No business details</i><br />' : '' !!}
                             {{ $invoice->business_details->get('name') }}<br />
+                            {{ $invoice->business_details->get('de') }}<br />
+                            {{ $invoice->business_details->get('oficina') }}<br />
                             {{ $invoice->business_details->get('location') }}<br />
                             Tel&eacute;fonos:{{ $invoice->business_details->get('phone') }}<br />
                             {{ $invoice->business_details->get('city') }},{{ $invoice->business_details->get('country') }}<br />
-                            CASA MATRIZ
+                            
                         </div>
                     </div>
                    
@@ -148,7 +150,7 @@
             </div>
             <table class="table table-bordered">
                 <thead>
-                    <tr style="background-color: #7393B3;">
+                    <tr style="background-color: #fff;">
                         <th style="width:10%">ITEM</th>
                         <th style="width:75%">CONCEPTO</th>
                         <th style="width:20%">IMPORTE</th>
@@ -158,15 +160,22 @@
                     @foreach ($invoice->items as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->get('name') }}</td>
-                            <td>{{ $item->get('totalPrice') }}</td>
+                            <td class="text-center">{{ $item->get('name') }}</td>
+                            <td class="text-center">{{ $item->get('totalPrice') }}</td>
                         </tr>
                     @endforeach
+                    @for ($i=$invoice->items->count();$i<10;$i++)
+                        <tr>
+                            <td></td>
+                            <td class="text-center">&nbsp;</td>
+                            <td class="text-center"></td>
+                        </tr>
+                    @endfor
                 </tbody>
                 <tfoot>
                  <tr>
                     <td colspan="2" style="text-align: right;"><b>Total:</b></td>
-                    <td>{{ $invoice->totalPriceFormatted() }}</td>
+                    <td class="text-center">{{ $invoice->totalPriceFormatted() }}</td>
                   </tr>
                   <tr>
                     <td colspan="3">Son: {{ $invoice->totalPriceLiteral() }} {{ $invoice->formatCurrency()->name_plural }}</td>
@@ -180,7 +189,7 @@
                             <div class="panel-body" >
                                C&oacute;digo de Control: {{ $invoice->code }}<br/>
                                Fecha L&iacute;mite de Emisi&oacute;n: {{ $invoice->due_date->format('d/m/Y') }}<br/>
-                               MANTENGA SUS PAGOS  POR ADELANTADO EVITE MULTAS POR RECONEXION 
+                               MANTENGA SUS PAGOS POR ADELANTADO EVITE MULTAS POR RECONEXION 
                                <div style="position:absolute; top:10px;left:305pt">
                                <img src="data:image/png;base64, {!! base64_encode($invoice->qr())!!}" />
                                </div>

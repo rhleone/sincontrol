@@ -68,6 +68,8 @@ return [
       'zip'         => '00000',
       'city'        => env('COMP_CIUDAD', 'Tarija'),
       'country'     => env('COMP_PAIS', 'Bolivia'),
+      'de'          => env('COMP_DE','De:'),
+      'oficina'          => env('COMP_OFICINA','CASA MATRIZ')
   ],
 
   /*
